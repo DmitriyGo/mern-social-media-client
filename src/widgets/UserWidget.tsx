@@ -30,7 +30,7 @@ const UserWidget = ({ userId, picturePath }) => {
 
     useEffect(() => {
         const getUser = async () => {
-            const response = await axios.get(`http://localhost:3001/users/${userId}`, {
+            const response = await axios.get(`https://tubular-tapioca-4cb88b.netlify.app//users/${userId}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             const data = await response.data;
