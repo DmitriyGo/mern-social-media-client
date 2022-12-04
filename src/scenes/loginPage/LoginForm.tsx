@@ -27,7 +27,7 @@ const LoginForm = ({ setPageType }: { setPageType(type: string): void }) => {
     return (
         <Formik
             onSubmit={async (values, { resetForm }) => {
-                const loggedInResponse = await fetch(`https://mern-social-media-server-dg.herokuapp.com/auth/login`, {
+                const loggedInResponse = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(values),
