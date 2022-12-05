@@ -21,7 +21,7 @@ const FriendListWidget: FC<Props> = ({userId}) => {
 
     const getFriends = async () => {
         const response = await axios.get(
-            `${import.meta.env.VITE_API_URL}/users/${userId}/friends`,
+            `http://localhost:3001/users/${userId}/friends`,
             {
                 headers: { Authorization: `Bearer ${token}` },
             },

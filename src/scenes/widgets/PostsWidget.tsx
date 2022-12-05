@@ -19,13 +19,13 @@ const PostsWidget: FC<Props> = ({ userId, isProfile = false }) => {
     const token = useAppSelector(state => state.token);
 
     const getPosts = async () => {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, { headers: { Authorization: `Bearer ${token}` } });
+        const response = await axios.get(`http://localhost:3001/posts`, { headers: { Authorization: `Bearer ${token}` } });
         const data = await response.data;
         dispatch(setPosts({ posts: data }));
     };
 
     const getUserPosts = async () => {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/posts/${userId}/posts`, { headers: { Authorization: `Bearer ${token}` } });
+        const response = await axios.get(`http://localhost:3001/posts/${userId}/posts`, { headers: { Authorization: `Bearer ${token}` } });
         const data = await response.data;
         dispatch(setPosts({ posts: data }));
     };

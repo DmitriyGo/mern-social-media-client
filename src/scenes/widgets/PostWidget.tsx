@@ -55,7 +55,7 @@ const PostWidget: FC<Props> = ({
     const primary = palette.primary.main;
 
     const patchLike = async () => {
-        const response = await axios.patch(`${import.meta.env.VITE_API_URL}/posts/${postId}/like`,
+        const response = await axios.patch(`http://localhost:3001/posts/${postId}/like`,
             JSON.stringify({ userId: loggedInUserId }),
             {
                 headers: {
@@ -91,7 +91,7 @@ const PostWidget: FC<Props> = ({
                         borderRadius: '0.75rem',
                         marginTop: '0.75rem',
                     }}
-                    src={`${import.meta.env.VITE_API_URL}assets/${picturePath}`}
+                    src={`http://localhost:3001/assets/${picturePath}`}
                 />
             )}
             <FlexBetween mt='0.25rem'>

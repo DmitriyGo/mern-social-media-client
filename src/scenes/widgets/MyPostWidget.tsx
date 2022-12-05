@@ -44,7 +44,7 @@ const MyPostWidget: FC<Props> = ({ picturePath }) => {
             formData.append("picturePath", image.name);
         }
 
-        const response = await axios.post(`${import.meta.env.VITE_API_URL}/posts`, formData,{
+        const response = await axios.post(`http://localhost:3001/posts`, formData,{
             headers: { Authorization: `Bearer ${token}` },
         });
 

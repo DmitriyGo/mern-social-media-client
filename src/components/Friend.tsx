@@ -34,7 +34,7 @@ const Friend: FC<Props> = ({ friendId, userPicturePath, subtitle, name }) => {
     const isFriend = friends.find((friend) => friend._id === friendId);
 
     const patchFriend = async () => {
-        const response = await axios.patch(`${import.meta.env.VITE_API_URL}/users/${_id}/${friendId}`, {}, {
+        const response = await axios.patch(`http://localhost:3001/users/${_id}/${friendId}`, {}, {
             headers: {
                 Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json',
