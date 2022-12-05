@@ -7,7 +7,7 @@ const UserImage = ({ image, size = '60px' }) => {
             width={size}
             height={size}
             alt='user'
-            src={image.isValid ? `http://localhost:3001/assets/${image}` : 'https://via.placeholder.com/100'}
+            src={`${import.meta.env.VITE_API_URL}/assets/${image}`}
         />
     </Box>);
 };

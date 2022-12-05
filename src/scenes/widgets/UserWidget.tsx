@@ -3,26 +3,27 @@ import {
     EditOutlined,
     LocationOnOutlined,
     WorkOutlineOutlined,
-} from "@mui/icons-material";
-import { Box, Typography, Divider, useTheme } from "@mui/material";
-import UserImage from "../components/UserImage";
-import FlexBetween from "../components/FlexBetween";
-import WidgetWrapper from "../components/WidgetWrapper";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAppSelector } from '../store/hooks';
+} from '@mui/icons-material';
+import { Box, Typography, Divider, useTheme } from '@mui/material';
+import UserImage from '../../components/UserImage';
+import FlexBetween from '../../components/FlexBetween';
+import WidgetWrapper from '../../components/WidgetWrapper';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from '../../store/hooks';
 import axios from 'axios';
 
-import twitter from '../assets/twitter.png'
-import linkedIn from '../assets/linkedin.png'
+import twitter from '../../assets/twitter.png';
+import linkedIn from '../../assets/linkedin.png';
 
-import { IUser } from '../models/User';
+import { IUser } from '../../models/User';
 
 const UserWidget = ({ userId, picturePath }) => {
     const [user, setUser] = useState<IUser>(null);
     const { palette } = useTheme();
     const navigate = useNavigate();
     const token = useAppSelector((state) => state.token);
+    const friendsFromSelector = useAppSelector((state) => state.user.friends);
     const dark = palette.neutral.dark;
     const medium = palette.neutral.medium;
     const main = palette.neutral.main;
@@ -30,7 +31,7 @@ const UserWidget = ({ userId, picturePath }) => {
 
     useEffect(() => {
         const getUser = async () => {
-            const response = await axios.get(`https://tubular-tapioca-4cb88b.netlify.app//users/${userId}`, {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/users/${userId}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             const data = await response.data;
@@ -38,7 +39,7 @@ const UserWidget = ({ userId, picturePath }) => {
         };
 
         getUser();
-    }, []);
+    }, [friendsFromSelector]);
 
     if (!user) {
         return null;
@@ -58,21 +59,21 @@ const UserWidget = ({ userId, picturePath }) => {
         <WidgetWrapper>
             {/* FIRST ROW */}
             <FlexBetween
-                gap="0.5rem"
-                pb="1.1rem"
+                gap='0.5rem'
+                pb='1.1rem'
                 onClick={() => navigate(`/profile/${userId}`)}
             >
-                <FlexBetween gap="1rem">
+                <FlexBetween gap='1rem'>
                     <UserImage image={picturePath} />
                     <Box>
                         <Typography
-                            variant="h4"
+                            variant='h4'
                             color={dark}
-                            fontWeight="500"
+                            fontWeight='500'
                             sx={{
-                                "&:hover": {
+                                '&:hover': {
                                     color: palette.primary.light,
-                                    cursor: "pointer",
+                                    cursor: 'pointer',
                                 },
                             }}
                         >
@@ -87,13 +88,13 @@ const UserWidget = ({ userId, picturePath }) => {
             <Divider />
 
             {/* SECOND ROW */}
-            <Box p="1rem 0">
-                <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
-                    <LocationOnOutlined fontSize="large" sx={{ color: main }} />
+            <Box p='1rem 0'>
+                <Box display='flex' alignItems='center' gap='1rem' mb='0.5rem'>
+                    <LocationOnOutlined fontSize='large' sx={{ color: main }} />
                     <Typography color={medium}>{location}</Typography>
                 </Box>
-                <Box display="flex" alignItems="center" gap="1rem">
-                    <WorkOutlineOutlined fontSize="large" sx={{ color: main }} />
+                <Box display='flex' alignItems='center' gap='1rem'>
+                    <WorkOutlineOutlined fontSize='large' sx={{ color: main }} />
                     <Typography color={medium}>{occupation}</Typography>
                 </Box>
             </Box>
@@ -101,16 +102,16 @@ const UserWidget = ({ userId, picturePath }) => {
             <Divider />
 
             {/* THIRD ROW */}
-            <Box p="1rem 0">
-                <FlexBetween mb="0.5rem">
+            <Box p='1rem 0'>
+                <FlexBetween mb='0.5rem'>
                     <Typography color={medium}>Who's viewed your profile</Typography>
-                    <Typography color={main} fontWeight="500">
+                    <Typography color={main} fontWeight='500'>
                         {viewedProfile}
                     </Typography>
                 </FlexBetween>
                 <FlexBetween>
                     <Typography color={medium}>Impressions of your post</Typography>
-                    <Typography color={main} fontWeight="500">
+                    <Typography color={main} fontWeight='500'>
                         {impressions}
                     </Typography>
                 </FlexBetween>
@@ -119,16 +120,16 @@ const UserWidget = ({ userId, picturePath }) => {
             <Divider />
 
             {/* FOURTH ROW */}
-            <Box p="1rem 0">
-                <Typography fontSize="1rem" color={main} fontWeight="500" mb="1rem">
+            <Box p='1rem 0'>
+                <Typography fontSize='1rem' color={main} fontWeight='500' mb='1rem'>
                     Social Profiles
                 </Typography>
 
-                <FlexBetween gap="1rem" mb="0.5rem">
-                    <FlexBetween gap="1rem">
-                        <img src={twitter} alt="twitter" />
+                <FlexBetween gap='1rem' mb='0.5rem'>
+                    <FlexBetween gap='1rem'>
+                        <img src={twitter} alt='twitter' />
                         <Box>
-                            <Typography color={main} fontWeight="500">
+                            <Typography color={main} fontWeight='500'>
                                 Twitter
                             </Typography>
                             <Typography color={medium}>Social Network</Typography>
@@ -137,11 +138,11 @@ const UserWidget = ({ userId, picturePath }) => {
                     <EditOutlined sx={{ color: main }} cursor='pointer' />
                 </FlexBetween>
 
-                <FlexBetween gap="1rem">
-                    <FlexBetween gap="1rem">
-                        <img src={linkedIn} alt="linkedin" />
+                <FlexBetween gap='1rem'>
+                    <FlexBetween gap='1rem'>
+                        <img src={linkedIn} alt='linkedin' />
                         <Box>
-                            <Typography color={main} fontWeight="500">
+                            <Typography color={main} fontWeight='500'>
                                 Linkedin
                             </Typography>
                             <Typography color={medium}>Network Platform</Typography>
